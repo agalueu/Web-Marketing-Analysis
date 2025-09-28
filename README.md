@@ -63,4 +63,10 @@ The ERD below illustrates the relationships between users, sessions, campaigns, 
 *(ERD image generated via dbdiagram.io)*
 
 📈 **Power BI Dashboard**
-The dashboard highlights KPIs such as conversion rates, revenue by campaign, ROI by channel, and user engagement trends.
+The dashboard highlights some insights such as:
+  - Users distribution, engagement, sessions and views ... [Activity Overview](images/activity_overview.png)
+  - Campaigns performance ... [Campaigns](images/campaign_performance.png)
+  - Demographics ... [Demographic](images/demographics.png)
+  - Cohort ... [Cohort](images/retention_cohort.png)
+  - Traffic source ... [Traffic](images/traffic_soruce.png)
+  - Revenue, ROI, active users and more ... [Activity Overall](images/funnel_conversions.png)
