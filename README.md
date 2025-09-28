@@ -38,15 +38,16 @@ The dataset was synthetically generated using Python and exported into CSV files
 │   ├── sessions_sample.csv
 │   ├── campaigns_sample.csv
 │   ├── conversions_sample.csv
-    ├── 
-    ├── 
+│   ├── ERD
+├── images/
+│   ├── Samples of queries
+│   ├── Sample of charts on power BI
 ├── sql/
-│   └── queries.sql
-    └── SQUEMA.sql
-├── dashboard/
-│   └── marketing_dashboard.pbix
+│   └── Analysis.sql
+│   └── SQUEMA.sql
+│   Analysis_resume.md 
 ├── README.md
-└── ERD.png
+└── LICENSE
 ```
 
 🔄 **How to Reproduce**
@@ -54,8 +55,8 @@ The dataset was synthetically generated using Python and exported into CSV files
 1. Clone the repository.
 2. Run the SQL schema to create the database.
 3. Import the CSV files into PostgreSQL.
-4. Run the queries inside `sql/queries.sql`.
-5. Open the Power BI file (`dashboard/marketing_dashboard.pbix`) and connect it to the database.
+4. Run the queries inside [Analysis](sql/Analysis.sql)
+5. Open Power BI, connect to the database and import queries.
 
 🔗 **Relationships (ERD)**
 The ERD below illustrates the relationships between users, sessions, campaigns, and conversions.
