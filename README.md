@@ -32,23 +32,11 @@ The dataset was synthetically generated using Python and exported into CSV files
 
 📂 **Repository Structure**
 
-```
-├── docs/
-│   ├── users_sample.csv
-│   ├── sessions_sample.csv
-│   ├── campaigns_sample.csv
-│   ├── conversions_sample.csv
-│   ├── ERD
-├── images/
-│   ├── Samples of queries
-│   ├── Sample of charts on power BI
-├── sql/
-│   └── Analysis.sql
-│   └── SQUEMA.sql
-│   Analysis_resume.md 
-├── README.md
-└── LICENSE
-```
+- docs/                  → ERD & raw dataset files
+- images/                → screenshots of dashboards (Power BI) and query results (pgAdmin)
+- sql/                   → database schema, load script, and analysis queries
+- Analysis_resume.md     → All queries analysis used for this repository
+- README.md              → project summary and instructions 
 
 🔄 **How to Reproduce**
 
