@@ -13,7 +13,7 @@ The dataset was synthetically generated using Python and exported into CSV files
 * **campaigns** → Campaign metadata (name, channel, budget, duration).
 * **conversions** → User conversions attributed to campaigns, with revenue and type.
 
-📌 **Original Data Source:** Synthetic data created with Python.
+📌 **Original Data Source:** Synthetic data.
 
 🛠️ **Tools & Technologies**
 
@@ -33,15 +33,16 @@ The dataset was synthetically generated using Python and exported into CSV files
 📂 **Repository Structure**
 
 ```
-├── data/
+├── docs/
 │   ├── users_sample.csv
 │   ├── sessions_sample.csv
 │   ├── campaigns_sample.csv
 │   ├── conversions_sample.csv
-├── scripts/
-│   └── generate_data.py
+    ├── 
+    ├── 
 ├── sql/
 │   └── queries.sql
+    └── SQUEMA.sql
 ├── dashboard/
 │   └── marketing_dashboard.pbix
 ├── README.md
