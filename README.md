@@ -44,6 +44,8 @@ The dataset was synthetically generated using Python and exported into CSV files
 The ERD below illustrates the relationships between users, sessions, campaigns, and conversions.
 *(ERD image generated via dbdiagram.io)*
 
+!(docs/ERD.png)
+
 ### 🔄 How to Reproduce
 - Create a PostgreSQL database:
       * In pgAdmin → right-click Databases → Create - Database → name it `web_marketing` (or any name you preffer).
