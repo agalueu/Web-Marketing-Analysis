@@ -44,7 +44,7 @@ The dataset was synthetically generated using Python and exported into CSV files
 The ERD below illustrates the relationships between users, sessions, campaigns, and conversions.
 *(ERD image generated via dbdiagram.io)*
 
-!(docs/ERD.png)
+![ERD](docs/ERD.png)
 
 ### 🔄 How to Reproduce
 - Create a PostgreSQL database:
