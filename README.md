@@ -38,17 +38,18 @@ The dataset was synthetically generated using Python and exported into CSV files
 - Analysis_resume.md     → All queries analysis used for this repository
 - README.md              → project summary and instructions 
 
-🔄 **How to Reproduce**
-
-1. Clone the repository.
-2. Run the SQL schema to create the database.
-3. Import the CSV files into PostgreSQL.
-4. Run the queries inside [Analysis](sql/Analysis.sql)
-5. Open Power BI, connect to the database and import queries.
-
 🔗 **Relationships (ERD)**
 The ERD below illustrates the relationships between users, sessions, campaigns, and conversions.
 *(ERD image generated via dbdiagram.io)*
+
+### 🔄 How to Reproduce
+- Create a PostgreSQL database:
+      * In pgAdmin → right-click Databases → Create - Database → name it `web_marketing` (or any name you preffer).
+- Schema & Data Import:
+      * Run the schema script in [SCHEMA](sql/SCHEMA.sql) to create all tables and insert data.
+- Sample queries:
+      * Analytical SQL queries are available in [Analysis](sql/Analysis.sql).
+      * These queries can be run in pgAdmin or connected directly to Power BI for visualization.
 
 📈 **Power BI Dashboard**
 The dashboard highlights some insights such as:
