@@ -1,17 +1,19 @@
 # Web Marketing Analysis
 
 📌 **Overview**
+
 This project analyzes marketing performance by combining user data, campaign information, sessions, and conversions. The goal is to identify which campaigns and channels drive the most value, understand user engagement patterns, and evaluate return on investment (ROI).
 
 📊 **Dataset**
+
 The dataset was synthetically generated using Python and exported into CSV files. Due to size limitations, only a **sample dataset** is included in this repository. You can regenerate the full dataset by running the provided Python script.
 
 **Main tables:**
 
-* **users** → Information about users (signup date, country, age group, gender).
-* **sessions** → Details of user sessions (device, source, page views, session duration).
-* **campaigns** → Campaign metadata (name, channel, budget, duration).
-* **conversions** → User conversions attributed to campaigns, with revenue and type.
+   - users → Information about users (signup date, country, age group, gender).
+   - sessions → Details of user sessions (device, source, page views, session duration).
+   - campaigns → Campaign metadata (name, channel, budget, duration).
+   - conversions → User conversions attributed to campaigns, with revenue and type.
 
 📌 **Original Data Source:** Synthetic data.
 
