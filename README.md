@@ -42,10 +42,20 @@ Synthetic data.
 - README.md              → project summary and instructions 
 
 ## 🗄 Database Schema & ERD
+The database captures user activity, sessions, campaigns, and conversions to analyze marketing performance.
+
+**Schema Overview**
+- users → stores user demographic information (signup date, country, age group, gender).
+- sessions → tracks details of user activity, including device, traffic source, page views, and session duration.
+- campaigns → metadata about marketing campaigns (name, channel, budget, duration).
+- conversions → records user conversions attributed to campaigns, with revenue amount and conversion type.
 
 ## 🔗 Relationships (ERD)
-The ERD below illustrates the relationships between users, sessions, campaigns, and conversions.
-*(ERD image generated via dbdiagram.io)*
+- A user can have multiple sessions.
+- Sessions may be influenced by different campaigns.
+- Each conversion is linked to a user and attributed to a campaign.
+
+This structure allows analysis of channel effectiveness, ROI, user engagement, and conversion behavior.
 
 ## 📌 Entity-Relationship Diagram (ERD):
 ![ERD](docs/ERD.png)
