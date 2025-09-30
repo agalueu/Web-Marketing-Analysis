@@ -1,4 +1,4 @@
-# Web Marketing Analysis
+🌐 # Web Marketing Analysis
 
 ## 📌 Overview
 
@@ -15,7 +15,7 @@ The dataset was synthetically generated using Python and exported into CSV files
    - campaigns → Campaign metadata (name, channel, budget, duration).
    - conversions → User conversions attributed to campaigns, with revenue and type.
 
-### 📌 Original Data Source:
+### 🌐 Original Data Source:
 Synthetic data.
 
 ## 🛠️ Tools & Technologies
@@ -41,10 +41,13 @@ Synthetic data.
 - Analysis_resume.md     → All queries analysis used for this repository
 - README.md              → project summary and instructions 
 
+## 🗄 Database Schema & ERD
+
 ## 🔗 Relationships (ERD)
 The ERD below illustrates the relationships between users, sessions, campaigns, and conversions.
 *(ERD image generated via dbdiagram.io)*
 
+## 📌 Entity-Relationship Diagram (ERD):
 ![ERD](docs/ERD.png)
 
 ## 🔄 How to Reproduce
@@ -64,3 +67,9 @@ The dashboard highlights some insights such as:
   - Cohort ... [Cohort](images/retention_cohort.png)
   - Traffic source ... [Traffic](images/traffic_soruce.png)
   - Revenue, ROI, active users and more ... [Activity Overall](images/funnel_conversions.png)
+
+## ✅ Key Takeaways
+- Conversion rates differ greatly depending on campaign channel.
+- Paid advertising drives high traffic but not always high ROI.
+- Organic channels (SEO, referrals) have stronger long-term conversion impact.
+- Retargeting campaigns improve customer retention and repeat purchases.
