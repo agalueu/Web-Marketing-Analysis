@@ -35,6 +35,7 @@ JOIN users u ON c.user_id = u.user_id
 GROUP BY u.age_group, u.gender, c.conversion_type
 
 --How do user engagement metrics (page views, session duration) impact conversion likelihood?
+--With page views
 WITH conversion_users AS (
 	SELECT  user_id,
 			age_group,
@@ -43,16 +44,74 @@ WITH conversion_users AS (
 				ELSE 'non-converted'
 			END AS label
 	FROM users u
+),
+
+session_metric AS (
+	SELECT  user_id,
+		COUNT(session_id) AS total_sessions,
+		ROUND(AVG(page_views), 2) AS avg_page_views
+	FROM sessions
+	GROUP BY user_id
+),
+
+bucket AS (
+	SELECT  cu.user_id,
+			avg_page_views,
+			cu.label,
+			NTILE(3) OVER (ORDER BY avg_page_views) AS engagement_bucket
+	FROM conversion_users cu
+	JOIN session_metric sm ON cu.user_id = sm.user_id
 )
 
-SELECT  COUNT(cu.user_id) AS users,
-		cu.label,
-		COUNT(s.session_id) AS sessions,
-		ROUND(AVG(s.page_views), 2) AS pages_views_avg,
-		ROUND(AVG(s.session_duration), 2) AS session_duration_avg
-FROM conversion_users cu
-LEFT JOIN sessions s ON cu.user_id = s.user_id
-GROUP BY cu.label;
+SELECT  COUNT(user_id) AS users,
+		COUNT(user_id) FILTER (WHERE label = 'converted') AS converted_users,
+		ROUND(COUNT(user_id) FILTER (WHERE label = 'converted'):: DECIMAL / COUNT(user_id), 2) AS conversion_rate,
+		CASE 
+			WHEN engagement_bucket = 1 THEN 'Low engagement'
+			WHEN engagement_bucket = 2 THEN 'Medium engagement'
+			ELSE 'High engagement'
+		END AS engagement
+FROM bucket
+GROUP BY engagement_bucket;
+
+--With session duration
+WITH conversion_users AS (
+	SELECT  user_id,
+			age_group,
+			CASE
+				WHEN EXISTS (SELECT 1 FROM conversions c WHERE c.user_id = u.user_id) THEN 'converted'
+				ELSE 'non-converted'
+			END AS label
+	FROM users u
+),
+
+session_metric AS (
+	SELECT  user_id,
+		COUNT(session_id) AS total_sessions,
+		ROUND(AVG(session_duration), 2) AS avg_duration
+	FROM sessions
+	GROUP BY user_id
+),
+
+bucket AS (
+	SELECT  cu.user_id,
+			avg_duration,
+			cu.label,
+			NTILE(3) OVER (ORDER BY avg_duration) AS engagement_bucket
+	FROM conversion_users cu
+	JOIN session_metric sm ON cu.user_id = sm.user_id
+)
+
+SELECT  COUNT(user_id) AS users,
+		COUNT(user_id) FILTER (WHERE label = 'converted') AS converted_users,
+		ROUND(COUNT(user_id) FILTER (WHERE label = 'converted'):: DECIMAL / COUNT(user_id), 2) AS conversion_rate,
+		CASE 
+			WHEN engagement_bucket = 1 THEN 'Low engagement'
+			WHEN engagement_bucket = 2 THEN 'Medium engagement'
+			ELSE 'High engagement'
+		END AS engagement
+FROM bucket
+GROUP BY engagement_bucket;
 
 --Which campaigns are most effective at retaining users over time?
 WITH cohort AS (
