@@ -123,7 +123,7 @@ Track campaign performance over time (unique conversions, revenue, and conversio
 - table_2: Total conversions per campaign per month.
 - Join both to calculate avg_conversions_user.
 
-### 📊 Business Insights
+### Business Insights
 - Reveals campaign lifecycle performance (launch spikes, decline phases).
 - Identifies long-term vs short-lived campaigns.
 - Shows efficiency per user alongside revenue trends.
