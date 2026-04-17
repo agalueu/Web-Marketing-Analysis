@@ -1,85 +1,96 @@
-🌐 # Web Marketing Analysis
+# Web Marketing Analysis
 
-## 📌 Overview
+### Overview
+This project analyzes digital marketing performance by integrating user behavior, campaign data, and conversion outcomes into a unified analytical model.
 
-This project analyzes marketing performance by combining user data, campaign information, sessions, and conversions. The goal is to identify which campaigns and channels drive the most value, understand user engagement patterns, and evaluate return on investment (ROI).
+The objective is to evaluate campaign effectiveness, user engagement patterns, and return on investment (ROI) using SQL-based analysis and dashboard visualization.
 
-## 📊 Dataset
+### Analytical Objectives
+- Measure ROI by campaign and channel
+- Identify high-value customer segments
+-Analyze user engagement impact on conversions
+-Evaluate retention through cohort analysis
+-Compare traffic sources in terms of quality vs volume
 
-The dataset was synthetically generated using Python and exported into CSV files. Due to size limitations, only a **sample dataset** is included in this repository. You can regenerate the full dataset by running the provided Python script.
+### Dataset
+The dataset was synthetically generated using Python to simulate a real-world marketing environment with:
+- Multi-channel campaigns
+- User behavioral tracking (sessions)
+- Conversion attribution
+- Revenue generation
 
-### Main tables:
+Only a sample dataset is included. The full dataset can be regenerated using the provided script.
 
-   - users → Information about users (signup date, country, age group, gender).
-   - sessions → Details of user sessions (device, source, page views, session duration).
-   - campaigns → Campaign metadata (name, channel, budget, duration).
-   - conversions → User conversions attributed to campaigns, with revenue and type.
+### Analytical Approach
+The analysis follows a structured workflow:
+1. Data Modeling
+   - Designed a relational schema to represent users, sessions, campaigns, and conversions
+   - Defined primary/foreign key relationships to ensure data integrity
 
-### 🌐 Original Data Source:
-Synthetic data.
+2.Data Preparation
+   - Validated joins between behavioral and transactional data
+   - Ensured consistency in campaign attribution
 
-## 🛠️ Tools & Technologies
+3. Exploratory Analysis
+   - Aggregated user activity metrics (sessions, page views, duration)
+   - Compared engagement across channels and devices
 
-* PostgreSQL
-* Python (for synthetic data generation)
-* Power BI (dashboard & visualization)
-* dbdiagram.io (for ERD design)
+4.Advanced Analysis
+   - ROI calculation: revenue vs campaign cost
+   - Conversion rate segmentation by demographic groups
+   - Cohort analysis for retention tracking
+   - Traffic source quality analysis (conversion efficiency vs volume)
 
-## ❓ Key Business Questions
+5.Visualization
+   - Built interactive dashboards in Power BI to present KPIs and trends
 
-1. Which marketing channels and campaigns bring the highest ROI?
-2. What are the key demographics (age group, gender, country) that drive conversions?
-3. How do user engagement metrics (page views, session duration) impact conversion likelihood?
-4. Which campaigns are most effective at retaining users over time?
-5. What is the revenue distribution across different campaign types and channels?
+### Tools & Technologies
+- PostgreSQL (data modeling, analysis)
+- Python (data generation)
+- Power BI (data visualization)
+- dbdiagram.io (ERD design)
 
-## 📂 Repository Structure
+### Database Schema
+The database is structured to capture the full marketing funnel:
+- users → demographic attributes
+- sessions → behavioral activity
+- campaigns → marketing investments
+- conversions → revenue-generating events
 
-- docs/                  → ERD & raw dataset files
-- images/                → screenshots of dashboards (Power BI) and query results (pgAdmin)
-- sql/                   → database schema, load script, and analysis queries
-- Analysis_resume.md     → All queries analysis used for this repository
-- README.md              → project summary and instructions 
+### Key Relationships
+One-to-many: users → sessions
+Many-to-one: sessions → campaigns
+One-to-many: users → conversions
 
-## 🗄 Database Schema & ERD
-The database captures user activity, sessions, campaigns, and conversions to analyze marketing performance.
+This enables full funnel analysis from acquisition to revenue.
 
-**Schema Overview**
-- users → stores user demographic information (signup date, country, age group, gender).
-- sessions → tracks details of user activity, including device, traffic source, page views, and session duration.
-- campaigns → metadata about marketing campaigns (name, channel, budget, duration).
-- conversions → records user conversions attributed to campaigns, with revenue amount and conversion type.
+### Key Analyses Performed
+- Campaign ROI calculation using aggregated revenue and budget
+- Conversion rate analysis by:
+   - channel
+   - demographic segment
+- Engagement impact:
+   - correlation between session activity and conversion likelihood
+- Cohort retention analysis:
+   - user return behavior over time
+- Traffic evaluation:
+   - high-volume vs high-conversion channels
 
-## 🔗 Relationships (ERD)
-- A user can have multiple sessions.
-- Sessions may be influenced by different campaigns.
-- Each conversion is linked to a user and attributed to a campaign.
+### Dashboard Highlights
+- Campaign performance (ROI, revenue, cost)
+- User engagement metrics (sessions, duration, page views)
+- Demographic segmentation
+- Retention cohort analysis
+- Traffic source comparison
 
-This structure allows analysis of channel effectiveness, ROI, user engagement, and conversion behavior.
+### Key Insights
+- High-traffic channels do not necessarily yield the highest ROI, indicating inefficiencies in paid acquisition strategies.
+- Organic and referral channels show stronger conversion efficiency and long-term value.
+- Higher session engagement (page views and duration) correlates with increased conversion probability.
+- Retargeting campaigns significantly improve user retention and repeat conversions.
 
-## 📌 Entity-Relationship Diagram (ERD):
-![ERD](docs/ERD.png)
-
-## 🔄 How to Reproduce
-- Create a PostgreSQL database:
-      * In pgAdmin → right-click Databases → Create - Database → name it `web_marketing` (or any name you preffer).
-- Schema & Data Import:
-      * Run the schema script in [SCHEMA](sql/SCHEMA.sql) to create all tables and insert data.
-- Sample queries:
-      * Analytical SQL queries are available in [Analysis](sql/Analysis.sql).
-      * These queries can be run in pgAdmin or connected directly to Power BI for visualization.
-
-## 📈 Power BI Dashboard
-The dashboard highlights some insights such as:
-  - Users distribution, engagement, sessions and views ... [Activity Overview](images/activity_overview.png)
-  - Campaigns performance ... [Campaigns](images/campaign_performance.png)
-  - Demographics ... [Demographic](images/demographics.png)
-  - Cohort ... [Cohort](images/retention_cohort.png)
-  - Traffic source ... [Traffic](images/traffic_soruce.png)
-  - Revenue, ROI, active users and more ... [Activity Overall](images/funnel_conversions.png)
-
-## ✅ Key Takeaways
-- Conversion rates differ greatly depending on campaign channel.
-- Paid advertising drives high traffic but not always high ROI.
-- Organic channels (SEO, referrals) have stronger long-term conversion impact.
-- Retargeting campaigns improve customer retention and repeat purchases.
+### How to Reproduce
+1. Create a PostgreSQL database
+2. Run schema script: sql/SCHEMA.sql
+3. Execute analysis queries: sql/Analysis.sql
+4. (Optional) Connect to Power BI for visualization
