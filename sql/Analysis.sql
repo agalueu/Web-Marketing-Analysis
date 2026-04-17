@@ -35,32 +35,62 @@ JOIN users u ON c.user_id = u.user_id
 GROUP BY u.age_group, u.gender, c.conversion_type
 
 --How do user engagement metrics (page views, session duration) impact conversion likelihood?
-SELECT  DATE_TRUNC('month', session_date)::date AS month,
-		SUM(page_views) AS total_pages_view,
-		ROUND(SUM(session_duration)::decimal/60, 2) AS total_session_duration
-FROM sessions
-GROUP BY DATE_TRUNC('month', session_date);
-
---Which campaigns are most effective at retaining users over time?
-WITH total_users AS (
-	SELECT COUNT(user_id) AS cohort, DATE_TRUNC('month', signup_date)::date AS month
-	FROM users
-	GROUP BY month
-),
-
-unique_users AS (
-	SELECT COUNT(DISTINCT s.user_id) AS unique_user,DATE_TRUNC('month', signup_date)::date AS month
-	FROM sessions s
-	JOIN users u ON s.user_id = u.user_id
-	GROUP BY month
+WITH conversion_users AS (
+	SELECT  user_id,
+			age_group,
+			CASE
+				WHEN EXISTS (SELECT 1 FROM conversions c WHERE c.user_id = u.user_id) THEN 'converted'
+				ELSE 'non-converted'
+			END AS label
+	FROM users u
 )
 
-SELECT  t.month,
-		t.cohort,
-		u.unique_user,
-		ROUND(u.unique_user::DECIMAL / t.cohort * 100, 2) AS retention_rate
-FROM total_users t
-JOIN unique_users u ON t.month = u.month;
+SELECT  COUNT(cu.user_id) AS users,
+		cu.label,
+		COUNT(s.session_id) AS sessions,
+		ROUND(AVG(s.page_views), 2) AS pages_views_avg,
+		ROUND(AVG(s.session_duration), 2) AS session_duration_avg
+FROM conversion_users cu
+LEFT JOIN sessions s ON cu.user_id = s.user_id
+GROUP BY cu.label;
+
+--Which campaigns are most effective at retaining users over time?
+WITH cohort AS (
+	SELECT  DISTINCT u.user_id,
+			DATE_TRUNC('month', u.signup_date)::DATE AS signup_month,
+			DATE_TRUNC('month', s.session_date)::DATE AS activity_month
+	FROM users u
+	JOIN sessions s ON u.user_id = s.user_id
+	WHERE DATE_TRUNC('month', s.session_date) >= DATE_TRUNC('month', u.signup_date)
+),
+
+cohort_size AS (
+	SELECT  
+		DATE_TRUNC('month', signup_date)::DATE AS signup_month,
+		COUNT(user_id) AS cohort_size
+	FROM users
+	GROUP BY signup_month
+),
+
+active_users AS (
+	SELECT  
+		signup_month,
+		DATE_PART('month', age(activity_month, signup_month)) AS months_since_signup,
+		COUNT(DISTINCT user_id) AS active_users
+	FROM cohort
+	GROUP BY signup_month, months_since_signup
+)
+
+SELECT  
+	au.signup_month,
+	au.months_since_signup,
+	au.active_users,
+	cs.cohort_size,
+	ROUND(au.active_users::DECIMAL / cs.cohort_size * 100, 2) AS retention_pct
+FROM active_users au
+JOIN cohort_size cs 
+	ON au.signup_month = cs.signup_month
+ORDER BY au.signup_month, au.months_since_signup;
 
 --What is the revenue distribution across different campaign types and channels?
 SELECT  c.campaign_name,
